@@ -1,0 +1,11 @@
+// eslint-disable-next-line no-unused-vars
+function errorHandler(err, req, res, next) {
+  console.error(`[ERROR] ${req.method} ${req.url}`, err.message);
+  const status = err.status || 500;
+  res.status(status).json({
+    error: err.message || "Internal server error",
+    path: req.url,
+  });
+}
+
+module.exports = errorHandler;

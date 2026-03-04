@@ -1,0 +1,50 @@
+.mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(10,15,24,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+  z-index: 200;
+}
+
+.mob-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.mob-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 2px;
+  border: none;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--font);
+  transition: all 0.2s;
+  position: relative;
+}
+.mob-btn.active {
+  color: var(--gold);
+}
+.mob-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 3px;
+}
+
+.mob-icon  { font-size: 18px; }
+.mob-label { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
