@@ -20,9 +20,14 @@ const PORT = process.env.PORT || 4000;
 // ── Middleware ──────────────────────────────────────────────────────
 app.use(cors({
   origin: (origin, cb) => {
-    // Allow requests from any localhost port (dev) or same-origin (prod)
-    if (!origin || /^https?:\/\/localhost(:\d+)?$/.test(origin)) cb(null, true);
-    else cb(null, false);
+    // Allow same-origin (prod), any localhost (dev), or Render deploy
+    if (!origin
+      || /^https?:\/\/localhost(:\d+)?$/.test(origin)
+      || /\.onrender\.com$/.test(origin)) {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
   },
   credentials: true,
 }));
@@ -61,7 +66,7 @@ if (fs.existsSync(frontendDist)) {
 app.use(errorHandler);
 
 // ── Start ────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   getDb(); // initialise DB on startup
   console.log(`\n⚡ PPP3 Tracker API running at http://localhost:${PORT}`);
   console.log(`   Health check: http://localhost:${PORT}/api/health\n`);

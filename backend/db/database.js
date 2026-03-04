@@ -3,7 +3,7 @@ const fs       = require("fs");
 const path     = require("path");
 require("dotenv").config();
 
-const DB_PATH  = process.env.DB_PATH  || "./ppp3.db";
+const DB_PATH  = process.env.DB_PATH || (process.env.NODE_ENV === "production" ? "/data/ppp3.db" : "./ppp3.db");
 const START_DATE = process.env.START_DATE || new Date().toISOString().split("T")[0];
 
 let db;

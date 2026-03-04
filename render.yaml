@@ -1,0 +1,21 @@
+databases: []
+
+services:
+  - type: web
+    name: ppp3-tracker
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build && cd ../backend && npm install
+    startCommand: cd backend && node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4000"
+      - key: START_DATE
+        value: "2026-01-24"
+    disk:
+      name: ppp3-data
+      mountPath: /data
+      sizeGB: 1
